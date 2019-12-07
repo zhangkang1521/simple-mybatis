@@ -7,13 +7,16 @@ import java.util.List;
 
 public class PreparedStatementHandler implements StatementHandler {
 
+    private Configuration configuration;
     private MappedStatement mappedStatement;
-
     private ResultSetHandler resultSetHandler;
 
-    public PreparedStatementHandler(MappedStatement mappedStatement) {
+
+
+    public PreparedStatementHandler(MappedStatement mappedStatement, Configuration configuration) {
         this.mappedStatement = mappedStatement;
-        this.resultSetHandler = new DefaultResultSetHandler(mappedStatement);
+        this.configuration = configuration;
+        this.resultSetHandler = configuration.newResultSetHandler(mappedStatement);
     }
 
     @Override

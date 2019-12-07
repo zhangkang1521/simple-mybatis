@@ -1,14 +1,18 @@
 package org.zk.simplemybatis;
 
-public class User {
-    private int id;
-    private String username;
+import java.util.Date;
 
-    public int getId() {
+public class User {
+    private Integer id;
+    private String username;
+    private Date birthday;
+    private Boolean enable;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -18,5 +22,21 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Boolean getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
     }
 }

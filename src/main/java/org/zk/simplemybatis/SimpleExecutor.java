@@ -7,15 +7,17 @@ import java.util.List;
 
 public class SimpleExecutor implements Executor {
 
+    private Configuration configuration;
     private Connection connection;
 
-    public SimpleExecutor(Connection connection) {
+    public SimpleExecutor(Connection connection, Configuration configuration) {
         this.connection = connection;
+        this.configuration = configuration;
     }
 
     @Override
     public <E> List<E> query(MappedStatement ms, Object parameter) throws SQLException {
-        StatementHandler statementHandler = new PreparedStatementHandler(ms);
+        StatementHandler statementHandler = configuration.newStatementHandler(ms);
         Statement statement = statementHandler.prepare(connection);
         statementHandler.parameterize(statement);
         return statementHandler.query(statement);
