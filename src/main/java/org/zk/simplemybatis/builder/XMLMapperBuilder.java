@@ -1,11 +1,9 @@
 package org.zk.simplemybatis.builder;
 
-import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.zk.simplemybatis.Configuration;
 import org.zk.simplemybatis.MappedStatement;
-import org.zk.simplemybatis.io.Resources;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,6 +12,9 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import java.io.InputStream;
 
+/**
+ * Mapper文件解析
+ */
 public class XMLMapperBuilder {
 
     private Configuration configuration;

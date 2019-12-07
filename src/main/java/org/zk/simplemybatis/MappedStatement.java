@@ -1,9 +1,9 @@
 package org.zk.simplemybatis;
 
 public class MappedStatement {
-    private String id;
-    private String sourceSql;
-    private Class<?> resultType;
+    private String id; // namespace + sqlId 如：org.zk.dao.UserDao.findAll
+    private String sourceSql; // xml中配置的sql
+    private Class<?> resultType; // 返回值类型
 
     public String getId() {
         return id;

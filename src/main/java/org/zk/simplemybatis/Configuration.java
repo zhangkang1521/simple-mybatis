@@ -1,9 +1,10 @@
 package org.zk.simplemybatis;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.zk.simplemybatis.type.*;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,8 @@ import java.util.Map;
  * 全局配置类
  */
 public class Configuration {
+
+    public static final Logger log = LoggerFactory.getLogger(Configuration.class);
 
     private Map<Class, TypeHandler> typeHandlerMapping = new HashMap<>();
     private Map<String, MappedStatement> mappedStatements = new HashMap<>();
@@ -27,6 +30,7 @@ public class Configuration {
     }
 
     public void addMappedStatement(MappedStatement mappedStatement) {
+        log.debug("注册MappedStatement:{}", mappedStatement.getId());
         this.mappedStatements.put(mappedStatement.getId(), mappedStatement);
     }
 
