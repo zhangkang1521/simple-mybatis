@@ -1,4 +1,4 @@
-package org.zk.simplemybatis;
+package org.zk.test.domain;
 
 import java.util.Date;
 

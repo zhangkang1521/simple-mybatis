@@ -6,10 +6,14 @@ import java.sql.SQLException;
 
 public class DefaultSqlSessionFactory implements SqlSessionFactory{
 
+    private Configuration configuration;
+
+    public DefaultSqlSessionFactory(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
     @Override
     public SqlSession openSession() {
-        // TODO 不能每次都创建
-        Configuration configuration = new Configuration();
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zk", "root", "123456");
@@ -17,6 +21,6 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory{
             throw new RuntimeException(e);
         }
         Executor executor = configuration.newExecutor(connection);
-        return new DefaultSqlSession(executor);
+        return new DefaultSqlSession(configuration, executor);
     }
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 public class Configuration {
 
     private Map<Class, TypeHandler> typeHandlerMapping = new HashMap<>();
+    private Map<String, MappedStatement> mappedStatements = new HashMap<>();
 
     public Configuration() {
         initTypeHandlerMapping();
@@ -25,8 +26,16 @@ public class Configuration {
         typeHandlerMapping.put(java.util.Date.class, new DateTypeHandler());
     }
 
+    public void addMappedStatement(MappedStatement mappedStatement) {
+        this.mappedStatements.put(mappedStatement.getId(), mappedStatement);
+    }
+
     public TypeHandler getTypeHandler(Class cls) {
         return typeHandlerMapping.get(cls);
+    }
+
+    public MappedStatement getMappedStatement(String mappedStatementId) {
+        return mappedStatements.get(mappedStatementId);
     }
 
     public Executor newExecutor(Connection connection) {
