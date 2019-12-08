@@ -5,6 +5,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.zk.simplemybatis.io.Resources;
+import org.zk.test.dao.UserDao;
+import org.zk.test.domain.User;
 
 import java.io.InputStream;
 import java.util.List;
@@ -29,6 +31,13 @@ public class SqlSessionTest {
     @Test
     public void testSelectList() {
         List list = sqlSession.selectList("org.zk.test.dao.UserDao.findAll", null);
+    }
+
+    @Test
+    public void testDao() {
+        UserDao userDao = sqlSession.getMapper(UserDao.class);
+        System.out.println(userDao.toString());
+//        List list = userDao.findAll();
     }
 
 
