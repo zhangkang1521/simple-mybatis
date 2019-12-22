@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -23,7 +24,7 @@ public class SimpleExecutor implements Executor {
     @Override
     public <E> List<E> query(MappedStatement ms, Object parameter) throws SQLException {
         StatementHandler statementHandler = configuration.newStatementHandler(ms);
-        Statement statement = statementHandler.prepare(connection);
+        PreparedStatement statement = statementHandler.prepare(connection);
         statementHandler.parameterize(statement);
         return statementHandler.query(statement);
     }

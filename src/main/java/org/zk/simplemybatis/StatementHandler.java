@@ -1,6 +1,7 @@
 package org.zk.simplemybatis;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -12,13 +13,13 @@ public interface StatementHandler {
      * @param connection
      * @return
      */
-    Statement prepare(Connection connection) throws SQLException;
+    PreparedStatement prepare(Connection connection) throws SQLException;
 
     /**
      * 设置参数
      * @param statement
      */
-    void parameterize(Statement statement);
+    void parameterize(PreparedStatement statement);
 
     /**
      * 执行查询，并处理结果集
@@ -26,6 +27,6 @@ public interface StatementHandler {
      * @param <E>
      * @return
      */
-    <E> List<E> query(Statement statement)  throws SQLException ;
+    <E> List<E> query(PreparedStatement statement)  throws SQLException ;
 
 }

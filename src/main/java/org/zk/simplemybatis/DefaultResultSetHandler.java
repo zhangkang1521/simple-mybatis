@@ -39,7 +39,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
         while (rs.next()) {
             Object rowObj = BeanUtils.newInstance(resultType);
             for (int i = 1; i <= columnCount; i++) {
-                String columnName = metaData.getColumnName(i);
+                String columnName = metaData.getColumnName(i).toLowerCase();
                 Class returnType = BeanUtils.getFieldClass(resultType, columnName); // 数据库和Bean必须一致
                 TypeHandler typeHandler = configuration.getTypeHandler(returnType);
                 Object value = null;

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -25,19 +26,19 @@ public class PreparedStatementHandler implements StatementHandler {
     }
 
     @Override
-    public Statement prepare(Connection connection) throws SQLException {
+    public PreparedStatement prepare(Connection connection) throws SQLException {
+        log.info("prepare statement {}", mappedStatement.getSourceSql());
         return connection.prepareStatement(mappedStatement.getSourceSql());
     }
 
     @Override
-    public void parameterize(Statement statement) {
+    public void parameterize(PreparedStatement statement) {
         // TODO 待实现
     }
 
     @Override
-    public <E> List<E> query(Statement statement) throws SQLException {
-        log.info("执行sql:{}", mappedStatement.getSourceSql());
-        statement.execute(mappedStatement.getSourceSql());
+    public <E> List<E> query(PreparedStatement statement) throws SQLException {
+        statement.execute();
         return resultSetHandler.handleResultSets(statement);
     }
 }
