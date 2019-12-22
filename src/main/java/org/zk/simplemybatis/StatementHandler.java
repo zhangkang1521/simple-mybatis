@@ -1,32 +1,40 @@
 package org.zk.simplemybatis;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
-public interface StatementHandler {
+public class StatementHandler {
 
-    /**
-     * 创建Statement
-     * @param connection
-     * @return
-     */
-    PreparedStatement prepare(Connection connection) throws SQLException;
+    public static final Logger log = LoggerFactory.getLogger(StatementHandler.class);
 
-    /**
-     * 设置参数
-     * @param statement
-     */
-    void parameterize(PreparedStatement statement);
+    private Configuration configuration;
+    private MappedStatement mappedStatement;
+    private ResultSetHandler resultSetHandler;
 
-    /**
-     * 执行查询，并处理结果集
-     * @param statement
-     * @param <E>
-     * @return
-     */
-    <E> List<E> query(PreparedStatement statement)  throws SQLException ;
 
+
+    public StatementHandler(MappedStatement mappedStatement, Configuration configuration) {
+        this.mappedStatement = mappedStatement;
+        this.configuration = configuration;
+        this.resultSetHandler = configuration.newResultSetHandler(mappedStatement);
+    }
+
+    public PreparedStatement prepare(Connection connection) throws SQLException {
+        log.info("prepare statement {}", mappedStatement.getSourceSql());
+        return connection.prepareStatement(mappedStatement.getSourceSql());
+    }
+
+    public void parameterize(PreparedStatement statement) {
+        // TODO 待实现
+    }
+
+    public <E> List<E> query(PreparedStatement statement) throws SQLException {
+        statement.execute();
+        return resultSetHandler.handleResultSets(statement);
+    }
 }

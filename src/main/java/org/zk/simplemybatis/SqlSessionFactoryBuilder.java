@@ -8,6 +8,6 @@ public class SqlSessionFactoryBuilder {
 
     public SqlSessionFactory build(InputStream in) {
         Configuration configuration = new XMLConfigBuilder(in).parse();
-        return new DefaultSqlSessionFactory(configuration);
+        return new SqlSessionFactory(configuration);
     }
 }

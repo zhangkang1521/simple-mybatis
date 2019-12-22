@@ -43,14 +43,14 @@ public class Configuration {
     }
 
     public Executor newExecutor(Connection connection) {
-        return new SimpleExecutor(connection, this);
+        return new Executor(connection, this);
     }
 
     public StatementHandler newStatementHandler(MappedStatement mappedStatement) {
-        return new PreparedStatementHandler(mappedStatement, this);
+        return new StatementHandler(mappedStatement, this);
     }
 
     public ResultSetHandler newResultSetHandler(MappedStatement mappedStatement) {
-        return new DefaultResultSetHandler(mappedStatement, this);
+        return new ResultSetHandler(mappedStatement, this);
     }
 }
