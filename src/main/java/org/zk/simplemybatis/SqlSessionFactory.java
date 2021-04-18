@@ -20,7 +20,7 @@ public class SqlSessionFactory {
     public SqlSession openSession() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection("jdbc:hsqldb:mem:mybatis", "sa", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zk", "root", "123456");
             log.info("获取数据库连接成功");
         } catch (SQLException e) {
             throw new RuntimeException(e);
